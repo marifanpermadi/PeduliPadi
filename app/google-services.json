@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "924064023081",
+    "project_id": "pedulipadi-2f313",
+    "storage_bucket": "pedulipadi-2f313.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924064023081:android:2ffffbf28d4b19dbfe5238",
+        "android_client_info": {
+          "package_name": "com.example.pedulipadi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs3zrwEDqTJaCVlKCKVkA3LrnAGS_0w7A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
