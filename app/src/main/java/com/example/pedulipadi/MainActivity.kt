@@ -325,8 +325,6 @@ fun ImagePicker(navController: NavHostController) {
             }
         )
     }
-
-
 }
 
 fun getUniqueFilename(context: Context, baseName: String): String {
