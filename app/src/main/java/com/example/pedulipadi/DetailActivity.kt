@@ -38,6 +38,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import com.example.pedulipadi.ui.theme.NormalBlue
 import com.example.pedulipadi.ui.theme.PeduliPadiTheme
 import kotlin.math.roundToInt
 
@@ -205,13 +206,14 @@ fun TextInBox(text: String) {
             .wrapContentSize()
             .background(
                 shape = RoundedCornerShape(20.dp),
-                color = Color.Green
+                color = NormalBlue
             )
     ) {
         Text(
             text = text,
             modifier = Modifier
                 .padding(10.dp),
+            color = Color.White,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold
         )

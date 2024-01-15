@@ -45,6 +45,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -119,13 +120,13 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun ImagePicker(navController: NavHostController) {
-    var bitmap by remember {
+    var bitmap by rememberSaveable {
         mutableStateOf<Bitmap?>(null)
     }
 
-    var imageFromCamera by remember { mutableStateOf(false) }
+    var imageFromCamera by rememberSaveable { mutableStateOf(false) }
     var showDialog by remember { mutableStateOf(false) }
-    var leafResult by remember { mutableStateOf("") }
+    var leafResult by rememberSaveable { mutableStateOf("") }
 
     val context = LocalContext.current
     val activity = context as Activity
@@ -172,6 +173,11 @@ fun ImagePicker(navController: NavHostController) {
             != PackageManager.PERMISSION_GRANTED
         ) {
             permissionsToRequest.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            permissionsToRequest.add(Manifest.permission.CAMERA)
         }
         if (permissionsToRequest.isNotEmpty()) {
             ActivityCompat.requestPermissions(
@@ -286,7 +292,17 @@ fun ImagePicker(navController: NavHostController) {
 
             Button(
                 onClick = {
-                    cameraLauncher.launch(null)
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        cameraLauncher.launch(null)
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Error. Izinkan aplikasi untuk dapat mengakses kamera perangkat pada pengaturan.",
+                            Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }, modifier = Modifier
                     .width(300.dp),
                 colors = ButtonDefaults.buttonColors(
